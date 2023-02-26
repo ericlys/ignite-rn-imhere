@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 import { useState } from "react";
 import {
   Alert,
@@ -8,12 +9,16 @@ import {
   View,
 } from "react-native";
 import { Participant } from "../../components/Participant";
+import 'dayjs/locale/pt-br';
 
 import { styles } from "./styles";
 
 export function Home() {
   const [participants, setParticipants] = useState<string[]>([]);
   const [participantName, setParticipantName] = useState("");
+
+  const date = new Date();
+  const formatedDate = dayjs(date).locale('pt-br').format('dddd, D [de] MMMM [de] YYYY');
 
   function handleParticipantAdd() {
     if (participants.includes(participantName)) {
@@ -46,7 +51,7 @@ export function Home() {
     <View style={styles.container}>
       <Text style={styles.eventName}>Nome do evento</Text>
 
-      <Text style={styles.eventDate}>Sexta, 4 de Novembro de 2022</Text>
+      <Text style={styles.eventDate}>{formatedDate}</Text>
 
       <View style={styles.form}>
         <TextInput
